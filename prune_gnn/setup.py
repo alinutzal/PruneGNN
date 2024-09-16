@@ -1,3 +1,6 @@
+import os
+os.environ["CC"] = "gcc"
+os.environ["CXX"] = "gcc"
 from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
@@ -14,3 +17,4 @@ setup(
     cmdclass={
         'build_ext': BuildExtension
     })
+# ]

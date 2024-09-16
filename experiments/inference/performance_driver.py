@@ -1,3 +1,5 @@
+#dcgmi profile --pause https://docs.nersc.gov/tools/performance/nvidiaproftools/
+
 #!/usr/bin/env python
 
 from argparse import ArgumentParser, FileType
@@ -157,6 +159,7 @@ def process_profiler_results(profiler_output_path, instance):
 
     # Run profiler again to parse results as csv
     completed_proc = run_subprocess(f"ncu -i {profiler_output_path.with_suffix('.ncu-rep')} --csv --kernel-name-base demangled --print-units base --print-summary per-nvtx", False)
+
     if not completed_proc:
         print_failed_rows(instance)
         return
@@ -242,7 +245,7 @@ def process_profiler_results(profiler_output_path, instance):
     details.to_csv(results_file, index=False, header=False)
          
 def build_profile_command(command, profiler_output_path):
-    return f"ncu --nvtx --target-processes all --metrics gpu__time_duration.avg -f -o '{profiler_output_path}' {command}"
+    return f"ncu --nvtx --target-processes all --metrics gpu__time_duration.avg -f -o '{profiler_output_path}' {'/pscratch/sd/a/alazar/PruneGNN/.venv/bin/'+command}"
 
 def build_command(instance):
     # Do a really neat thing to expand arguments

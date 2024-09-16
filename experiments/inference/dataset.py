@@ -9,7 +9,7 @@ def get_dataset(args):
     if args.model_type != "DGNN":
         dir = args.dataset_dir + "/raw/" + args.dataset_name
         if args.dataset_name == 'Cora' or args.dataset_name == 'Pubmed' or args.dataset_name == 'CiteSeer':
-            dataset = Planetoid(dir, args.dataset_name, transform=T.NormalizeFeatures())
+            dataset = Planetoid("$SCRATCH"+dir, args.dataset_name, transform=T.NormalizeFeatures())
             data = dataset[0]
             data.x = data.x.to_dense()
 

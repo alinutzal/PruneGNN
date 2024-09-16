@@ -5,7 +5,8 @@ import torch_geometric.transforms as T
 def get_dataset(args, dataset_dir):
 
     if args.dataset_name == 'Cora' or args.dataset_name == 'Pubmed' or args.dataset_name == 'CiteSeer':
-        dataset = Planetoid(dataset_dir, args.dataset_name, transform=T.NormalizeFeatures())
+        print("$SCRATCH"+dataset_dir)
+        dataset = Planetoid("$SCRATCH"+dataset_dir, args.dataset_name, transform=T.NormalizeFeatures())
         data = dataset[0]
 
         num_features = dataset.num_features
