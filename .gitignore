@@ -21,3 +21,4 @@ run/
 **.ipynb_checkpoints**
 *datasets*
 prune_gnn/build/*
+*.ninja*
