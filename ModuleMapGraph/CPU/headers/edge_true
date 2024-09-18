@@ -1,0 +1,5 @@
+#ifndef TRACKING_EDGE_TRUE
+#define TRACKING_EDGE_TRUE
+#include "edge_true.cpp"
+#endif
+

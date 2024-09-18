@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_PRESCAN
+#define TRACKING_CUDA_PRESCAN
+#include "prescan.cu"
+#endif
+

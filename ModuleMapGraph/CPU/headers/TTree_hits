@@ -1,0 +1,5 @@
+#ifndef TRACKING_TTREE_HITS
+#define TRACKING_TTREE_HITS
+#include "TTree_hits.cpp"
+#endif
+

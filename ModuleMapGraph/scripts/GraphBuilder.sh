@@ -1,0 +1,21 @@
+GraphBuilder.exe \
+    --gpu-nb-blocks=512 \
+    --input-dir=100events \ # 100events events.Jan.J001 \
+    --input-filename-pattern=event \
+    --input-module-map=ModuleMap.90k \
+    --input-strip-modules=stripModules_v00_2023-06-07.root \
+    --strip-hit-pair=False \
+    --output-dir=OUTPUT_DIR_GEN \
+    --give-true-graph=True \
+    --save-graph-on-disk-graphml=True \
+    --save-graph-on-disk-npz=True \
+    --save-graph-on-disk-pyg=True \
+    --save-graph-on-disk-csv=True \
+    --min-pt-cut=1 \
+    --min-nhits=3 \
+    --phi-slice=False \
+    --cut1-phi-slice=0. \
+    --cut2-phi-slice=0. \
+    --eta-region=False \
+    --cut1-eta=0. \
+    --cut2-eta=0. \

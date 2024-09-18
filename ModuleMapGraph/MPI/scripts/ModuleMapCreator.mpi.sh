@@ -1,0 +1,20 @@
+rm OUTPUT_DIR_GEN/*
+mpirun -np 3 ModuleMapCreator.mpi.exe \
+    --input-dir=events.Jan \
+    --grid-input-dir=cchpssatlas:/hpss/in2p3.fr/group/atlas/stark/GNN4ITk/NewSamples/mc15_14TeV.600012.PhPy8EG_A14_ttbar_hdamp258p75_nonallhad.recon.RDO.e8185_s3770_s3773_r14429__CSV \
+    --input-module-map=SortedMMtripletMerged_3hits_ptCut1GeV_woutSec_events_0kto90k_woutElectron_woutOverlapSP.root \
+    --log=log \
+    --output-module-map=ModuleMap \
+    --save-partial-module-maps-on-disk=False \
+    --output-dir=OUTPUT_DIR_GEN \
+    --give-true-graph=True \
+    --save-graph-on-disk-graphml=True \
+    --save-graph-on-disk-npz=True \
+    --min-pt-cut=1. \
+    --min-nhits=3 \
+    --phi-slice=False \
+    --cut1-phi-slice=0. \
+    --cut2-phi-slice=0. \
+    --eta-region=False \
+    --cut1-eta=0. \
+    --cut2-eta=0. \

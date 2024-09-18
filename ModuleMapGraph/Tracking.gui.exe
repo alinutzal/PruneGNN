@@ -1,0 +1,73 @@
+#!/bin/bash
+#***************************************************************
+#* Tracking project library - L2IT
+#* Trace reconstruction in LHC
+#* copyright © 2024 COLLARD Christophe
+#* copyright © 2024 Centre National de la Recherche Scientifique
+#* copyright © 2024 Laboratoire des 2 Infinis de Toulouse (L2IT)
+#***************************************************************/
+
+whiptail --title "Welcome to ModuleMapGraph"
+
+PLATEFORM=$(whiptail --title "Main Menu" --menu "Choose a plateform" 25 78 5 \
+"CPU" "     compile, execute, profile codes on CPU" \
+"GPU" "     compile, execute, profile codes on GPU" \
+3>&1  1>&2 2>&3 
+)
+  case $PLATEFORM in
+    "CPU")
+      source configure.cpu.sh
+      ;;
+    "GPU")
+      source configure.gpu.sh
+      ;;
+  esac
+
+
+OPT_TO_RUN=$(whiptail --title "Main Menu" --menu "Choose an option" 25 78 5 \
+"compile" "     compile codes with g++, icpc, mpic++, nvcc, nvc++" \
+"Module Map Creator" "     set parameters & run Module Map Creator" \
+"Graph Construction" "     set parameters & run Graph Builder" \
+"get c++ standard" "" \
+"Quit" "" 3>&1  1>&2 2>&3 
+)
+
+while true; do
+
+#echo -e '\033[31mWelcome to the Tracking program\033[0m'
+#PS3='please choose what you want to do: '
+#options=("compile code" "run g++ version" "run intel version" "run mpi version" "run nvcc version" "profile code" "get c++ standard" "Quit")
+#select opt in "${options[@]}"; do
+#  case $opt in
+
+  case $OPT_TO_RUN in
+    "compile")
+      source $Tracking_path/scripts/compile.gui.sh
+      ;;
+    "run g++ version")
+      source $Tracking_path/scripts/run.g++-programs.sh
+      ;;
+    "run intel version")
+      source $Tracking_path/scripts/run.intel-programs.sh
+      ;;
+    "run mpi version")
+      source $Tracking_path/MPI/scripts/run.mpi-programs.sh
+      ;;
+    "run nvcc version")
+      source $Tracking_path/GPU/scripts/run.nvcc-programs.sh
+      ;;
+    "profile code")
+      source $Tracking_path/scripts/profile.sh
+      ;;
+    "get c++ standard")
+      dialog --title "C++ standard" --colors --msgbox "C++ standard: \Z1\Zb $($Tracking_path/build/bin/c++.vs.exe)" 8 78
+      ;;
+    "Quit")
+      echo -e "\033[34mUser requested exit\033[0m"
+      break
+      ;;
+    *) echo -e "\033[31minvalid option\033[0m $REPLY"
+      ;;
+  esac
+  REPLY=
+done

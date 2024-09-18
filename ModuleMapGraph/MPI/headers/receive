@@ -1,0 +1,5 @@
+#ifndef MPI_RECEIVE
+#define MPI_RECEIVE
+#include "receive.cpp"
+#endif
+

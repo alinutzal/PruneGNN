@@ -1,0 +1,5 @@
+#ifndef TRACKING_VERTEX
+#define TRACKING_VERTEX
+#include "vertex.cpp"
+#endif
+

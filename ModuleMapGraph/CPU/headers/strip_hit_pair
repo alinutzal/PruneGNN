@@ -1,0 +1,5 @@
+#ifndef TRACKING_STRIP_HIT_PAIR
+#define TRACKING_STRIP_HIT_PAIR
+#include "strip_hit_pair.cpp"
+#endif
+

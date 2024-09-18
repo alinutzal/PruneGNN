@@ -1,0 +1,5 @@
+#ifndef TRACKING_STRIP_MODULE_DB
+#define TRACKING_STRIP_MODULE_DB
+#include "strip_module_DB.cpp"
+#endif
+

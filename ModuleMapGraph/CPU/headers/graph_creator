@@ -1,0 +1,5 @@
+#ifndef TRACKING_GRAPH_CREATOR
+#define TRACKING_GRAPH_CREATOR
+#include "graph_creator.cpp"
+#endif
+

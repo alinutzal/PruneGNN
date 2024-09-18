@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_TTREE_HITS
+#define TRACKING_CUDA_TTREE_HITS
+#include "TTree_hits.cu"
+#endif
+

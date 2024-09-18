@@ -1,0 +1,77 @@
+image: gitlab-registry.cern.ch/ci-tools/ci-worker:cc7
+
+build-cpu-g++:
+  tags:
+    # Make you job be executed in a shared runner that has CVMFS mounted
+    - cvmfs
+  stage: build
+  before_script:
+    # Need to have acces to eos, so login with gnn4itk service account
+    - echo "${gnn4itk_robot_psswd}" | kinit ${gnn4itk_robot_username}@CERN.CH
+  script:
+    - echo "g++ compilation"
+    - source configure.cpu.sh
+    - source CPU/scripts/compile.g++.sh
+    - ln -s $Tracking_path/build/g++/CPU $Tracking_path/build/bin
+  artifacts:
+    paths:
+      - build
+    expire_in: 60 minutes
+
+
+ModuleMap_2023:
+  tags:
+    # Make you job be executed in a shared runner that has CVMFS mounted
+    - cvmfs
+  stage: test
+  before_script:
+    # Need to have acces to eos, so login with gnn4itk service account
+    - echo "${gnn4itk_robot_psswd}" | kinit ${gnn4itk_robot_username}@CERN.CH
+  script:
+    - echo "g++ CI"
+    - source configure.cpu.sh
+    - ln -s /eos/atlas/atlascerngroupdisk/perf-idtracking/GNN4ITk/ModuleMapGraph_CI/data.2023 CI/CPU/data.2023
+    - mkdir "$Tracking_path/log"
+    - echo  -e "\033[33;34mPlease wait, Module Map tests in progress on the CTD2023 dataset ...\033[0m"
+    - source $Tracking_path/CI/CPU/scripts/ModuleMap-2023.CI.sh
+
+ModuleMap_2024:
+  tags:
+    # Make you job be executed in a shared runner that has CVMFS mounted
+    - cvmfs
+  stage: test
+  before_script:
+    # Need to have acces to eos, so login with gnn4itk service account
+    - echo "${gnn4itk_robot_psswd}" | kinit ${gnn4itk_robot_username}@CERN.CH
+  script:
+    - echo "g++ CI"
+    - source configure.cpu.sh
+    - ln -s /eos/atlas/atlascerngroupdisk/perf-idtracking/GNN4ITk/ModuleMapGraph_CI/data.2024 CI/CPU/data.2024
+    - mkdir "$Tracking_path/log"
+    - echo  -e "\033[33;34mPlease wait, Module Map tests in progress on the 2024 dataset ...\033[0m"
+    - source $Tracking_path/CI/CPU/scripts/ModuleMap-2024.CI.sh
+
+GraphBuild_2023_cpu_g++:
+  tags:
+    # Make you job be executed in a shared runner that has CVMFS mounted
+    - cvmfs
+  stage: test
+  before_script:
+    # Need to have acces to eos, so login with gnn4itk service account
+    - echo "${gnn4itk_robot_psswd}" | kinit ${gnn4itk_robot_username}@CERN.CH
+  script:
+    - echo "g++ CI"
+    - source configure.cpu.sh
+    - ln -s /eos/atlas/atlascerngroupdisk/perf-idtracking/GNN4ITk/ModuleMapGraph_CI/data.2023 CI/CPU/data.2023
+    - ln -s /eos/atlas/atlascerngroupdisk/perf-idtracking/GNN4ITk/ModuleMapGraph_CI/MM2023 CI/CPU/MM2023
+    - mkdir "$Tracking_path/log"
+    - echo  -e "\033[33;34mPlease wait, Graph Builder tests in progress on the CTD2023 dataset ...\033[0m"
+    - source $Tracking_path/CI/CPU/scripts/GraphBuilder-2023.CI.sh
+
+
+# deploy-prod:
+#   stage: deploy
+#   script:
+#     - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+#   environment: production
+

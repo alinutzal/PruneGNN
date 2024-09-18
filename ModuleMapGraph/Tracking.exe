@@ -1,0 +1,77 @@
+#!/bin/bash
+#***************************************************************
+#* Tracking project library - L2IT
+#* Trace reconstruction in LHC
+#* copyright © 2024 COLLARD Christophe
+#* copyright © 2024 Centre National de la Recherche Scientifique
+#* copyright © 2024 Laboratoire des 2 Infinis de Toulouse (L2IT)
+#***************************************************************/
+
+echo -e '\033[31mWelcome to the Tracking program\033[0m'
+
+PS3='please choose a platform: '
+options=("CPU" "GPU" "RTX8000" "None")
+select opt in "${options[@]}"; do
+  case $opt in
+    "CPU")
+      source configure.cpu.sh
+      break
+      ;;
+    "GPU")
+      source configure.gpu.sh
+      break
+      ;;
+    "RTX8000")
+      source configure.RTX8000.sh
+      break
+      ;;
+    "None")
+      break
+      ;;
+  esac
+done
+[[ ! -d $Tracking_path/build ]] && mkdir $Tracking_path/build
+export PATH=$PATH:$Tracking_path/build/bin
+
+PS3='please choose what you want to do: '
+options=("compile code" "run g++ version" "run intel version" "run mpi version" "run nvcc version" "run nvc++ version" "profile code" "CI CPU" "get c++ standard" "Quit")
+select opt in "${options[@]}"; do
+  case $opt in
+    "compile code")
+      source $Tracking_path/scripts/compile.sh
+      ;;
+    "run g++ version")
+      source $Tracking_path/CPU/scripts/run.g++-programs.sh
+      ;;
+    "run intel version")
+      source $Tracking_path/CPU/scripts/run.intel-programs.sh
+      ;;
+    "run mpi version")
+      source $Tracking_path/MPI/scripts/run.mpi-programs.sh
+      ;;
+    "run nvcc version")
+      source $Tracking_path/GPU/scripts/run.nvcc-programs.sh
+      ;;
+    "run nvc++ version")
+      source $Tracking_path/GPU/scripts/run.nvc++-programs.sh
+      ;;
+    "profile code")
+      source $Tracking_path/scripts/profile.sh
+      ;;
+    "CI CPU")
+      source $Tracking_path/CI/CPU/scripts/run.CI.cpu.sh
+      ;;
+    "get c++ standard")
+      echo -en "\033[33mC++ standard: "
+      $Tracking_path/build/bin/c++.vs.exe
+      echo -e "\033[34mMain Menu\033[0m"
+      ;;
+    "Quit")
+      echo -e "\033[34mUser requested exit\033[0m"
+      break
+      ;;
+    *) echo -e "\033[31minvalid option\033[0m $REPLY"
+      ;;
+  esac
+  REPLY=
+done

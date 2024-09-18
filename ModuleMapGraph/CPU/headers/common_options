@@ -1,0 +1,5 @@
+#ifndef TRACKING_COMMON_OPTIONS
+#define TRACKING_COMMON_OPTIONS
+#include "common_options.cpp"
+#endif
+

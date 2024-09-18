@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_STREAM_COMPACTION
+#define TRACKING_CUDA_STREAM_COMPACTION
+#include "stream_compaction.cu"
+#endif
+

@@ -1,0 +1,4 @@
+#ifndef TRACKING_GRAPH
+#define TRACKING_GRAPH
+#include "graph.cpp"
+#endif

@@ -1,0 +1,5 @@
+#ifndef TRACKING_HITS_INFOS
+#define TRACKING_HITS_INFOS
+#include "hits_infos.cpp"
+#endif
+

@@ -1,0 +1,90 @@
+# ModuleMapGraphConfig cmake package description
+#
+
+@PACKAGE_INIT@
+
+#########################################
+# Check that package variables are fine #
+#########################################
+
+set_and_check(ModuleMapGraph_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+set_and_check(ModuleMapGraph_LIBRARY_DIR "@PACKAGE_CMAKE_INSTALL_LIBDIR@" )
+set_and_check(ModuleMapGraph_BIN_DIR "@PACKAGE_CMAKE_INSTALL_BINDIR@" )
+set_and_check(ModuleMapGraph_CMAKE_DIR "@PACKAGE_CMAKE_INSTALL_CMAKEDIR@" )
+
+
+
+###############
+# Get targets #
+###############
+
+include("@PACKAGE_CMAKE_INSTALL_CMAKEDIR@/ModuleMapGraphConfig-targets.cmake")
+
+
+############################################
+# Check if we got all requested components #
+############################################
+
+# Helper macro to set variables for components
+macro(set_if_target _component _target)
+    if(TARGET ${_target})
+        set(ModuleMapGraph_${_component}_LIBRARY "${_target}")
+    else()
+        set(ModuleMapGraph_${_component}_LIBRARY "${_target}-NOTFOUND")
+    endif()
+endmacro()
+
+# Set variables if the target is present.
+# Afterwards we check if all required components are set.
+set_if_target(CPU ModuleMapGraph::CPU)
+set_if_target(GPU ModuleMapGraph::GPU)
+set_if_target(MPI ModuleMapGraph::MPI)
+
+# We always want CPU
+list(APPEND ModuleMapGraph_FIND_COMPONENTS "CPU")
+list(REMOVE_DUPLICATES ModuleMapGraph_FIND_COMPONENTS)
+
+# Create a list of requested libraries.
+foreach(_comp "CPU" "GPU" "MPI")
+   if("${ModuleMapGraph_FIND_COMPONENTS}" MATCHES "${_comp}")
+      list(APPEND ModuleMapGraph_REQUESTED_LIBS ModuleMapGraph_${_comp}_LIBRARY)
+   endif()
+endforeach()
+
+# Print a standard information message about the package being found.
+# Here we check that all required libraries are actually present
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ModuleMapGraph
+    REQUIRED_VARS CMAKE_CURRENT_LIST_FILE ${ModuleMapGraph_REQUESTED_LIBS}
+    VERSION_VAR "@PROJECT_VERSION@"
+)
+
+unset(ModuleMapGraph_REQUESTED_LIBS)
+
+
+
+#########################
+# Find the dependencies #
+#########################
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Boost @boost_version@
+    COMPONENTS filesystem program_options unit_test_framework graph python numpy
+)
+
+find_dependency(ROOT @root_version@
+    COMPONENTS Core Geom GenVector Hist Tree TreePlayer
+)
+
+find_dependency(Torch REQUIRED)
+
+find_dependency(Python COMPONENTS Interpreter Development NumPy)
+
+if( ModuleMapGraph_MPI_LIBRARY IN_LIST ModuleMapGraph_REQUESTED_LIBS )
+    find_dependency(MPI)
+endif()
+
+if( ModuleMapGraph_GPU_LIBRARY IN_LIST ModuleMapGraph_REQUESTED_LIBS )
+    enable_language(CUDA)
+endif()

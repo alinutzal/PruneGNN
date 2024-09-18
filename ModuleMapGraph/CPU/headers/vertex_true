@@ -1,0 +1,5 @@
+#ifndef TRACKING_VERTEX_TRUE
+#define TRACKING_VERTEX_TRUE
+#include "vertex_true.hpp"
+#endif
+

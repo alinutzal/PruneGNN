@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_MODULE_MAP_DOUBLET
+#define TRACKING_CUDA_MODULE_MAP_DOUBLET
+#include "module_map_doublet.cu"
+#endif
+

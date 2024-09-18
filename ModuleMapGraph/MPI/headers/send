@@ -1,0 +1,5 @@
+#ifndef MPI_SEND
+#define MPI_SEND
+#include "send.cpp"
+#endif
+

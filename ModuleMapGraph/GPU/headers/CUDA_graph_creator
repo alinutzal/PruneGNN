@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_GRAPH_CREATOR
+#define TRACKING_CUDA_GRAPH_CEATOR
+#include "graph_creator.cu"
+#endif
+

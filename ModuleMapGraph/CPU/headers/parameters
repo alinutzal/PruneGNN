@@ -1,0 +1,11 @@
+#ifndef __parameters
+#define __parameters
+
+#define data_type1 float
+#define data_type2 double
+//#define epsilon 1E-8
+const data_type1 epsilon = 1E-8;
+const data_type2 epsilon2 = 1E-16;
+
+#endif
+

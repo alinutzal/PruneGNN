@@ -1,0 +1,5 @@
+#ifndef TRACKING_MODULE_TRIPLET
+#define TRACKING_MODULE_TRIPLET
+#include "module_triplet.cpp"
+#endif
+

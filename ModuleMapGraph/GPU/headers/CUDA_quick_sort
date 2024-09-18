@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_QUICK_SORT
+#define TRACKING_CUDA_QUICK_SORT
+#include "quick_sort.cu"
+#endif
+

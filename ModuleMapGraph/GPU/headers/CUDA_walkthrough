@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_WALKTHROUGH
+#define TRACKING_CUDA_WALKTHROUGH
+#include "walkthrough.cu"
+#endif
+

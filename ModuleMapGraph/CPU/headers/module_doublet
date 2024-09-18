@@ -1,0 +1,5 @@
+#ifndef TRACKING_MODULE_DOUBLET
+#define TRACKING_MODULE_DOUBLET
+#include "module_doublet.cpp"
+#endif
+

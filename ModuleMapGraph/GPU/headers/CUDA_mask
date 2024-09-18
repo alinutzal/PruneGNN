@@ -1,0 +1,5 @@
+#ifndef TRACKING_CUDA_MASK
+#define TRACKING_CUDA_MASK
+#include "mask.cu"
+#endif
+
