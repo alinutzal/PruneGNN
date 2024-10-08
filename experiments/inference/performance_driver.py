@@ -255,8 +255,8 @@ def build_command(instance):
 
 def run_and_profile(instance):
     with TemporaryDirectory(ignore_cleanup_errors=True) as temp_dir:
-        profiler_output = Path(temp_dir) / "profile"
-
+        #profiler_output = Path(temp_dir) / "profile"
+        profiler_output = Path("/pscratch/sd/a/alazar/PruneGNN/experiments/inference/logs") / "profile"
         # Build profiler command
         command = build_command(instance)
         if not args.no_profile:

@@ -37,7 +37,7 @@ def analyze(rows, ranged_kernel):
 
     ## Make numbers numbers
     for row in rows:
-        row.update({"Average": float(row["Average"]), "Invocations": int(row["Invocations"])})
+        row.update({"Average": float(row["Average"].replace(",", "")), "Invocations": int(row["Invocations"])})
         if row["Metric Unit"] == "nsecond":
             row["Average"] /= 1000
             row["Metric Unit"] = "usecond"
